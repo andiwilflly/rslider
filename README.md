@@ -6,8 +6,8 @@
   </a>
 </p>
 
-
-# rSlider  🦄🌈  (beta)
+  🦄🌈
+# rSlider (beta)
 
 > Simple, scalable slider for React mobx projects
 
@@ -103,8 +103,8 @@ Make sure that all dependency packages is fetched and installed.
             <div>item 1</div>
             <div>item 2</div>
         </RSliderItems>
-        <RSliderArrowL onClick={ ()=> L('arrowL clicked!') } />
-        <RSliderArrowR onClick={ ()=> L('arrowR clicked!') } />
+        <RSliderArrowL onClick={ ()=> console.log('arrowL clicked!') } />
+        <RSliderArrowR onClick={ ()=> console.log('arrowR clicked!') } />
     </RSlider>
 ```
 ----
