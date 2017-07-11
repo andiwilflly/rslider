@@ -1,21 +1,25 @@
----
+[![deps][deps]][deps-url]
 
 <p align="right">
   <a href="https://npmjs.org/package/rslider">
     <img src="https://img.shields.io/npm/v/rslider.svg?style=flat-square">
   </a>
+
+  <a href="https://npmjs.com/package/rslider">
+  		<img src="https://img.shields.io/npm/dm/rslider.svg">
+  	</a>
 </p>
 
   🦄🌈
 # rSlider (beta)
 
-> Simple, scalable slider for React mobx projects
+> Simple, scalable slider for React mobx projects.
 
 
 ## Install
 
 ```sh
-$ npm install rslider
+$ npm install rslider --save
 ```
 
 Make sure that all dependency packages is fetched and installed.
@@ -43,7 +47,6 @@ Make sure that all dependency packages is fetched and installed.
 
 
 ## Usage
-
 
 - Controls
 - Pagination
@@ -167,3 +170,4 @@ Make sure that all dependency packages is fetched and installed.
 npm test
 
 ## Contributing
+--
