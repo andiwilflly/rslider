@@ -1,4 +1,5 @@
-[![deps][deps]][deps-url]
+
+  🦄🌈
 
 <p align="right">
   <a href="https://npmjs.org/package/rslider">
@@ -9,9 +10,6 @@
   		<img src="https://img.shields.io/npm/dm/rslider.svg">
   	</a>
 </p>
-
-  🦄🌈
-# rSlider (beta)
 
 > Simple, scalable slider for React mobx projects.
 
