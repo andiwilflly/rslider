@@ -1,15 +1,19 @@
 
   🦄🌈
 
-<p align="right">
+<p align="left">
   <a href="https://npmjs.org/package/rslider">
     <img src="https://img.shields.io/npm/v/rslider.svg?style=flat-square">
   </a>
 
   <a href="https://npmjs.com/package/rslider">
-  		<img src="https://img.shields.io/npm/dm/rslider.svg">
-  	</a>
+    <img src="https://img.shields.io/npm/dm/rslider.svg">
+  </a>
 </p>
+
+[![NPM](https://nodei.co/npm/rslider.png?downloads=true&downloadRank=true)](https://nodei.co/npm/rslider/)
+
+---
 
 > Simple, scalable slider for React mobx projects.
 
