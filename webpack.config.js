@@ -1,22 +1,23 @@
 var path = require('path');
 var webpack = require('webpack');
 
-
 module.exports = {
 	node: {
-		fs: 'empty' // https://github.com/josephsavona/valuable/issues/9
+		fs: "empty" // https://github.com/josephsavona/valuable/issues/9
 	},
 	entry: {
-		bundle: [ './lib/index.js' ]
+		bundle: [ "./lib/index.js" ]
 	},
 	output: {
 		path: path.join(__dirname, "src"), // This is where images AND js will go
-		filename: 'index.js'
+		filename: 'index.js',
+		library: 'library.js',
+		libraryTarget: 'umd'
 	},
 	externals: {
 		'react': 'React',
+		"react-dom": 'ReactDOM',
 		'mobx': 'mobx',
-		'lodash': '_',
 		'mobx-react': 'mobx-react'
 	},
 	stats: {

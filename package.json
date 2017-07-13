@@ -1,6 +1,5 @@
-origin 
 {
-	"version": "1.2.13",
+	"version": "1.2.31",
 	"main": "src/index.js",
 	"homepage": "https://github.com/andiwilflly/rslider",
 	"description": "rslider",
@@ -17,11 +16,9 @@ origin
 		"node": ">=0.10.0"
 	},
 	"dependencies": {
-		"lodash": "3.10.1",
 		"mobx": "^3.1.9",
 		"mobx-react": "^4.1.3",
-		"react": "^15.3.2",
-		"react-dom": "^15.5.4"
+		"react": "^15.3.2"
 	},
 	"devDependencies": {
 		"babel-cli": "^6.24.1",
