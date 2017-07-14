@@ -1,24 +1,44 @@
 var path = require('path');
 var webpack = require('webpack');
+var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
 	node: {
 		fs: "empty" // https://github.com/josephsavona/valuable/issues/9
 	},
+	devtool: 'source-map',
 	entry: {
-		bundle: [ "./lib/index.js" ]
+		bundle: [ "./src/index.js" ]
 	},
 	output: {
-		path: path.join(__dirname, "src"), // This is where images AND js will go
-		filename: 'index.js',
-		library: 'library.js',
-		libraryTarget: 'umd'
+		path: path.join(__dirname, "lib"),
+		filename: "index.js"
 	},
 	externals: {
-		'react': 'React',
-		"react-dom": 'ReactDOM',
-		'mobx': 'mobx',
-		'mobx-react': 'mobx-react'
+		 'react': {
+            root: 'React',
+            commonjs2: 'react',
+            commonjs: 'react',
+            amd: 'react'
+        },
+        'react-dom': {
+            root: 'ReactDOM',
+            commonjs2: 'react-dom',
+            commonjs: 'react-dom',
+            amd: 'react-dom'
+        },
+         'mobx': {
+            root: 'mobx',
+            commonjs2: 'mobx',
+            commonjs: 'mobx',
+            amd: 'mobx'
+        },
+        'mobx-react': {
+            root: 'mobx-react',
+            commonjs2: 'mobx-react',
+            commonjs: 'mobx-react',
+            amd: 'mobx-react'
+        }
 	},
 	stats: {
 		colors: true,
@@ -42,23 +62,24 @@ module.exports = {
 	plugins: [
 		new webpack.HotModuleReplacementPlugin(),
 		new webpack.NoEmitOnErrorsPlugin(),
-		new webpack.optimize.UglifyJsPlugin({
-			mangle: true,
-			beautify: true,
-			compress: {
-				warnings: false, // Suppress uglification warnings
-				pure_getters: true,
-				unsafe: true,
-				unsafe_comps: true,
-				screw_ie8: true
-			},
-			output: {
-				comments: false,
-			},
-			exclude: [/\.min\.js$/gi] // skip pre-minified libs
-		}),
+		// new webpack.optimize.UglifyJsPlugin({
+		// 	mangle: true,
+		// 	beautify: true,
+		// 	compress: {
+		// 		warnings: false, // Suppress uglification warnings
+		// 		pure_getters: true,
+		// 		unsafe: true,
+		// 		unsafe_comps: true,
+		// 		screw_ie8: true
+		// 	},
+		// 	output: {
+		// 		comments: false,
+		// 	},
+		// 	exclude: [/\.min\.js$/gi] // skip pre-minified libs
+		// }),
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': '"production"'
-		})
+		}),
+		new BundleAnalyzerPlugin()
 	]
 };

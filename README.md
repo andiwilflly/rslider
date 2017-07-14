@@ -45,7 +45,7 @@ Make sure that all dependency packages is fetched and installed.
 | autoPlay | false | Allow you slide change step on each 5000ms. Can be customized inside [rSliderItem] component. See examples below |
 | onStepChange | (slider)=>{} | Callback, that fire right after **rSlider** step changes. Returns **rSlider** model as first argument |
 | onDragEnd | (slider,draggable)=>{} | Callback, that fire right after **rSlider** drag event ends. Returns **rSlider** model as first argument and **draggable** state object as the second |
-| stickOut | 0 | Allow you to show next slide. That number concerts in pixels. |
+| stickOut | 0 | Allows you to show some part of the next slide. That number converts in pixels |
 
 
 ## Usage
@@ -166,10 +166,6 @@ Make sure that all dependency packages is fetched and installed.
 
     </RSlider>
 ```
-
-
-## Tests
-npm test
 
 ## Contributing
 --
