@@ -1,7 +1,6 @@
 // React
 import PropTypes from 'prop-types';
 // MobX
-import {action, reaction, observable, observe, computed, autorun, asStructure} from 'mobx';
 import { observer } from 'mobx-react';
 // Components
 import RSliderBasic from "./RSliderBasic";

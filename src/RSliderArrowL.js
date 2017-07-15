@@ -8,6 +8,7 @@ import rSliderModel from "./rSlider.model";
 // Components
 import RSliderBasic from "./RSliderBasic";
 
+
 @observer
 class RSliderArrowL extends RSliderBasic {
 

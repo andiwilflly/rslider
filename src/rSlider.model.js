@@ -1,6 +1,5 @@
 // MobX
 import { action, transaction, reaction, observable, computed, autorun, extendObservable, runInAction } from 'mobx';
-import { observer } from 'mobx-react';
 
 
 // @SOURCE: https://mobx.js.org/refguide/modifiers.html#modifiers-for-observable

@@ -12,18 +12,16 @@ module.exports = {
 	},
 	output: {
 		path: path.join(__dirname, "lib"),
-		filename: "index.js",
-	    library: 'rslider',
-	    libraryTarget: 'umd'
+		filename: "index.js"
 	},
 	externals: { // https://webpack.js.org/configuration/externals/#components/sidebar/sidebar.jsx
-		 'react': {
+        'react': {
             root: 'React',
             commonjs2: 'react',
             commonjs: 'react',
             amd: 'react'
         },
-         'mobx': {
+        'mobx': {
             root: 'mobx',
             commonjs2: 'mobx',
             commonjs: 'mobx',
