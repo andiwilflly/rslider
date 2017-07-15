@@ -3,29 +3,25 @@ var webpack = require('webpack');
 var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
-	node: {
-		fs: "empty" // https://github.com/josephsavona/valuable/issues/9
-	},
 	devtool: 'source-map',
+	node: { // https://github.com/josephsavona/valuable/issues/9
+		fs: "empty" 
+	},
 	entry: {
 		bundle: [ "./src/index.js" ]
 	},
 	output: {
 		path: path.join(__dirname, "lib"),
-		filename: "index.js"
+		filename: "index.js",
+	    library: 'rslider',
+	    libraryTarget: 'umd'
 	},
-	externals: {
+	externals: { // https://webpack.js.org/configuration/externals/#components/sidebar/sidebar.jsx
 		 'react': {
             root: 'React',
             commonjs2: 'react',
             commonjs: 'react',
             amd: 'react'
-        },
-        'react-dom': {
-            root: 'ReactDOM',
-            commonjs2: 'react-dom',
-            commonjs: 'react-dom',
-            amd: 'react-dom'
         },
          'mobx': {
             root: 'mobx',
@@ -38,6 +34,12 @@ module.exports = {
             commonjs2: 'mobx-react',
             commonjs: 'mobx-react',
             amd: 'mobx-react'
+        },
+        'prop-types': {
+            root: 'prop-types',
+            commonjs2: 'prop-types',
+            commonjs: 'prop-types',
+            amd: 'prop-types'
         }
 	},
 	stats: {

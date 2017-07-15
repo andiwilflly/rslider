@@ -1,3 +1,5 @@
+// React
+import PropTypes from 'prop-types';
 // MobX
 import {action, reaction, observable, observe, computed, autorun, asStructure} from 'mobx';
 import { observer } from 'mobx-react';
@@ -11,11 +13,11 @@ import RSliderBasic from "./RSliderBasic";
 class RSlider extends RSliderBasic {
 
 	static propTypes = {
-		name: ReactPropTypes.string.isRequired,
-		className: ReactPropTypes.string,
-		style: ReactPropTypes.object,
-		devMode: ReactPropTypes.bool,
-		currentStep: ReactPropTypes.number
+		name: PropTypes.string.isRequired,
+		className: PropTypes.string,
+		style: PropTypes.object,
+		devMode: PropTypes.bool,
+		currentStep: PropTypes.number
 	};
 
 
@@ -42,7 +44,7 @@ class RSlider extends RSliderBasic {
 
 
 	static childContextTypes = {
-		name: ReactPropTypes.string.isRequired
+		name: PropTypes.string.isRequired
 	};
 
 

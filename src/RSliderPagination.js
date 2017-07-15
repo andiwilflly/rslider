@@ -1,3 +1,5 @@
+// React
+import PropTypes from 'prop-types';
 // MobX
 import {action, reaction, observable, observe, computed, autorun, asStructure} from 'mobx';
 import { observer } from 'mobx-react';
@@ -13,7 +15,7 @@ class RSliderPagination extends RSliderBasic {
 	static _name = 'RSliderPagination';
 
 	static propTypes = {
-		className: ReactPropTypes.string
+		className: PropTypes.string
 	};
 
 	static defaultProps = {
@@ -21,7 +23,7 @@ class RSliderPagination extends RSliderBasic {
 	};
 
 	static contextTypes = {
-		name: ReactPropTypes.string.isRequired
+		name: PropTypes.string.isRequired
 	};
 
 

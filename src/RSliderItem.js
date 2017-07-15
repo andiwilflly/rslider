@@ -1,3 +1,5 @@
+// React
+import PropTypes from 'prop-types';
 // MobX
 import {action, reaction, observable, observe, computed, autorun, asStructure} from 'mobx';
 import { observer } from 'mobx-react';
@@ -13,11 +15,11 @@ class RSliderItem extends RSliderBasic {
 	static _name = 'RSliderItems';
 
 	static propTypes = {
-		itemIndex: React.PropTypes.number.isRequired
+		itemIndex: PropTypes.number.isRequired
 	};
 
 	static contextTypes = {
-		name: React.PropTypes.string.isRequired
+		name: PropTypes.string.isRequired
 	};
 
 
