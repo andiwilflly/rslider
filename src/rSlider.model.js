@@ -1,3 +1,5 @@
+// React
+import React from 'react';
 // MobX
 import { action, transaction, reaction, observable, computed, autorun, extendObservable, runInAction } from 'mobx';
 

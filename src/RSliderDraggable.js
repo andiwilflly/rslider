@@ -1,4 +1,5 @@
 // React
+import React from 'react';
 import PropTypes from 'prop-types';
 // MobX
 import { observer } from 'mobx-react';
@@ -12,7 +13,6 @@ import RSliderBasic from "./RSliderBasic";
 class RSliderDraggable extends RSliderBasic {
 
 	static _name = 'RSliderArrowR';
-
 
 	static contextTypes = {
 		name: PropTypes.string.isRequired

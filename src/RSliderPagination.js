@@ -1,4 +1,5 @@
 // React
+import React from 'react';
 import PropTypes from 'prop-types';
 // MobX
 import { observer } from 'mobx-react';

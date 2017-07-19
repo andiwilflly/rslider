@@ -167,5 +167,8 @@ Make sure that all dependency packages is fetched and installed.
     </RSlider>
 ```
 
-## Contributing
+## FAQ
 --
+
+- Why am I getting an error "Uncaught ReferenceError: regeneratorRuntime is not defined"
+  - You need to add 'babel-polyfill' as the first entry point of your's webpack.config

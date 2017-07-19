@@ -1,4 +1,5 @@
 // React
+import React from 'react';
 import PropTypes from 'prop-types';
 // MobX
 import { observer } from 'mobx-react';
@@ -6,6 +7,7 @@ import { observer } from 'mobx-react';
 import RSliderBasic from "./RSliderBasic";
 import RSliderDraggable from "./RSliderDraggable";
 import RSliderItem from "./RSliderItem";
+
 
 
 @observer

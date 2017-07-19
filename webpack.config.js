@@ -12,7 +12,9 @@ module.exports = {
 	},
 	output: {
 		path: path.join(__dirname, "lib"),
-		filename: "index.js"
+		filename: "index.js",
+		library: 'rSliderLib',
+		libraryTarget: 'umd'
 	},
 	externals: { // https://webpack.js.org/configuration/externals/#components/sidebar/sidebar.jsx
         'react': {
@@ -38,7 +40,8 @@ module.exports = {
             commonjs2: 'prop-types',
             commonjs: 'prop-types',
             amd: 'prop-types'
-        }
+        },
+        'babel-polyfill' : 'babel-polyfill'
 	},
 	stats: {
 		colors: true,
