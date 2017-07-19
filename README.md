@@ -168,7 +168,7 @@ Make sure that all dependency packages is fetched and installed.
 ```
 
 ## FAQ
---
 
-- Why am I getting an error "Uncaught ReferenceError: regeneratorRuntime is not defined"
-  - You need to add 'babel-polyfill' as the first entry point of your's webpack.config
+- Why am I getting an error "Uncaught ReferenceError: regeneratorRuntime is not defined"?
+  - Because babel-polyfill had not been require before bundle start parsing.
+    To get rid of it you need to add 'babel-polyfill' as the first entry point of your's webpack.config
