@@ -53,6 +53,9 @@ Make sure that all dependency packages is fetched and installed.
 - Controls
 - Pagination
 ```js
+    import rSlider from 'rslider';
+    const {RSlider, RSliderArrowL, RSliderArrowR, RSliderItems, RSliderPagination} = rSlider;
+    
     <RSlider name="example1">
         <RSliderItems>
             <div>item 1</div>
