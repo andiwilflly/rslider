@@ -11,7 +11,6 @@
   </a>
 </p>
 
-[![NPM](https://nodei.co/npm/rslider.png?downloads=true&downloadRank=true)](https://nodei.co/npm/rslider/)
 
 ---
 
@@ -26,6 +25,8 @@ $ npm install rslider --save
 
 Make sure that all dependency packages is fetched and installed.
 
+## Styles
+You can find styles for rSlider in: `node_modules/rslider/rslider.css`
 
 ## API
 | Propety | Default value | Description |
