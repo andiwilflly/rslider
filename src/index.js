@@ -1,6 +1,14 @@
-export const RSlider = require('./RSlider');
-export const RSliderItems = require("./RSliderItems.js");
-export const RSliderArrowL = require('./RSliderArrowL');
-export const RSliderArrowR = require('./RSliderArrowR');
-export const RSliderPagination = require('./RSliderPagination');
+import RSlider from "./RSlider.js";
+import RSliderItems  from"./RSliderItems.js";
+import RSliderArrowL from "./RSliderArrowL.js";
+import RSliderArrowR from "./RSliderArrowR.js";
+import RSliderPagination from "./RSliderPagination.js";
+
+module.exports = {
+	RSlider,
+	RSliderItems,
+	RSliderArrowL,
+	RSliderArrowR,
+	RSliderPagination
+};
 
