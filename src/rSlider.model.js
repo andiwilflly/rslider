@@ -29,6 +29,7 @@ class RSliderModel {
 		autoPlay: false,
 		stickOut: 0, // [0%-100%]
 		// Public callbacks
+		onReady: (slider)=> {},
 		onStepChange: (slider)=> {},
 		onDragEnd: (slider, draggable)=> {},
 

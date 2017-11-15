@@ -74,6 +74,8 @@ class RSliderBasic extends React.Component {
 				itemsShow: isShortSlider ? childrenLength : this.slider.itemsShow,
 				infinity: isShortSlider ? false : this.slider.infinity
 			});
+
+			if(!this.slider.itemsCount) this.slider.onReady(this.slider);
 		}, 300);
 	};
 
@@ -101,7 +103,6 @@ class RSliderBasic extends React.Component {
 				}
 			});
 
-			L('this._lastMatchedMediaName', this._lastMatchedMediaName);
 			if(!isMatched && this._lastMatchedMediaName !== 'default') {
 				this._lastMatchedMediaName = 'default';
 				rSliderModel.update({

@@ -44,6 +44,7 @@ You can find styles for rSlider in: `node_modules/rslider/rslider.css`
 | draggable | false | **rSlider** can be draggable *(except cases, when customAnimation === true)* |
 | draggableSensitivity | 10 | Only for enabled **infinity** mode. You can set any value from 0 to 100. The more draggableSensitivity, the more difficult to drag the slider to the next step |
 | autoPlay | false | Allow you slide change step on each 7000ms. Can be customized inside [rSliderItem] component. See examples below |
+| onReady | (slider)=>{} | Callback, that fire right after **rSlider** rendered |
 | onStepChange | (slider)=>{} | Callback, that fire right after **rSlider** step changes. Returns **rSlider** model as first argument |
 | onDragEnd | (slider,draggable)=>{} | Callback, that fire right after **rSlider** drag event ends. Returns **rSlider** model as first argument and **draggable** state object as the second |
 | stickOut | 0 | Allows you to show some part of the next slide. That number converts in pixels |
