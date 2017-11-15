@@ -3,6 +3,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 // MobX
 import { observer } from 'mobx-react';
+// Models
+import rSliderModel from "./rSlider.model";
 // Components
 import RSliderBasic from "./RSliderBasic";
 import RSliderDraggable from "./RSliderDraggable";
@@ -38,6 +40,23 @@ class RSliderItems extends RSliderBasic {
 
 	componentWillUnmount() {
 		window.removeEventListener("resize", this.recalculateSliderItems);
+	}
+
+
+	componentWillReceiveProps(nextProps) {
+		// Fix problem when we have [children] count update after [rSlider] creation
+		clearTimeout(this.timeout);
+		this.timeout = setTimeout(()=> {
+			if(nextProps.children.length !== this.slider.itemsCount) {
+				const event = document.createEvent('HTMLEvents');
+				event.initEvent('resize', true, false);
+				window.dispatchEvent(event);
+				rSliderModel.update({
+					name: this.slider.name,
+					currentStep: 0
+				});
+			}
+		}, 1000);
 	}
 
 

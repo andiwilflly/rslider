@@ -56,8 +56,7 @@ class RSliderModel {
 		return this;
 	}
 
-	// TODO: Need to think with head about next stuff:
-	// Because of this async a client need to add babel-polyfill as first entry in webpack.config either do 'require("babel-polyfill")' in this component
+
 	async update(state:Object) :RSliderModel {
 		let rSlider = this.rSliders.get(state.name);
 

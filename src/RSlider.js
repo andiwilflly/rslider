@@ -74,11 +74,6 @@ class RSlider extends RSliderBasic {
 	}
 
 
-	componentWillReceiveProps(nextProps) {
-		//if(!_.isEqual(this.props, nextProps)) rSliderModel.update({ ...nextProps, name: this.slider.name });
-	}
-
-
 	componentWillUnmount() {
 		this['RSlider | changed: this.slider.currentStep | run: this.slider.onStepChange()']();
 		window.removeEventListener("resize", this.onResizeSlider);
