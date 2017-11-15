@@ -66,6 +66,8 @@ class RSliderBasic extends React.Component {
 				:
 			this.getElementPureWidth(this.slider.sliderEl) / this.slider.itemsShow;
 
+			if(!this.slider.itemsCount) this.slider.onReady(this.slider);
+
 			rSliderModel.update({
 				name: this.sliderName,
 				itemsCount: childrenLength,
@@ -74,8 +76,6 @@ class RSliderBasic extends React.Component {
 				itemsShow: isShortSlider ? childrenLength : this.slider.itemsShow,
 				infinity: isShortSlider ? false : this.slider.infinity
 			});
-
-			if(!this.slider.itemsCount) this.slider.onReady(this.slider);
 		}, 300);
 	};
 
