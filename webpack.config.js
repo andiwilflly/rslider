@@ -1,6 +1,5 @@
 var path = require('path');
 var webpack = require('webpack');
-var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
 	devtool: 'source-map',
@@ -82,7 +81,6 @@ module.exports = {
 		// }),
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': '"production"'
-		}),
-		new BundleAnalyzerPlugin()
+		})
 	]
 };

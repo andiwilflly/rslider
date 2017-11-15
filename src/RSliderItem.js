@@ -45,7 +45,7 @@ class RSliderItem extends RSliderBasic {
 
 	@computed get isAutoPlay() { return (this.slider.currentVisibleItems[0] === this.props.itemIndex) && this.slider.autoPlay; };
 
-	@computed get duration() { return this.props.children.props ? this.props.children.props['data-duration'] || 5000 : null }
+	@computed get duration() { return this.props.children.props ? this.props.children.props['data-duration'] || 7000 : null }
 
 	@computed get isCurrentVisibleItem() { return this.slider.currentVisibleItems.includes(this.props.itemIndex) };
 
