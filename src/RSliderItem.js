@@ -68,6 +68,7 @@ class RSliderItem extends RSliderBasic {
 
 	startItemAutoPlayInterval() {
 		this.timer = setTimeout(()=> {
+			if(!this.slider) return; // RSlider was removed before
 			rSliderModel.update({
 				name: this.slider.name,
 				currentStep: rSliderModel.steps.isLast(this.slider) ? 0 : this.slider.currentStep + 1

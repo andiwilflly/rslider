@@ -74,7 +74,8 @@ class RSliderBasic extends React.Component {
 				innerWidth: itemWidth * childrenLength,
 				itemWidth: itemWidth,
 				itemsShow: isShortSlider ? childrenLength : this.slider.itemsShow,
-				infinity: isShortSlider ? false : this.slider.infinity
+				infinity: isShortSlider ? false : this.slider.infinity,
+				...typeof this.props.stickOut !== 'undefined' && { stickOut: this.props.stickOut }
 			});
 		}, 300);
 	};

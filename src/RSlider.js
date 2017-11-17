@@ -78,7 +78,8 @@ class RSlider extends RSliderBasic {
 	componentWillUnmount() {
 		this['RSlider | changed: this.slider.currentStep | run: this.slider.onStepChange()']();
 		window.removeEventListener("resize", this.onResizeSlider);
-		rSliderModel.remove({ name: this.slider.name });
+		// We need to take some time, before all RSlider [components] unMounted and remove their [reactions]
+		setTimeout(()=> rSliderModel.remove({ name: this.slider.name }), 200);
 	}
 
 
