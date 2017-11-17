@@ -38,7 +38,7 @@ class RSliderItem extends RSliderBasic {
 
 
 	componentWillUnmount() {
-		if(!this.slider.autoPlay) return;
+		if(!this['RSliderItem | changed: rSliderModel.currentStep | run: this.startItemAutoPlayInterval()']) return;
 		this['RSliderItem | changed: rSliderModel.currentStep | run: this.startItemAutoPlayInterval()']();
 	}
 
