@@ -55,6 +55,7 @@ class RSliderBasic extends React.Component {
 	};
 
 
+	// Call from [RSliderItems]
 	recalculateSliderItems = ()=> {
 		clearTimeout(this._timeout['recalculateSliderItems']);
 		this._timeout['recalculateSliderItems'] = setTimeout(()=> {

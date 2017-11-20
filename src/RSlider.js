@@ -55,6 +55,16 @@ class RSlider extends RSliderBasic {
 	}
 
 
+	componentWillReceiveProps(nextProps, nextState) {
+		if(nextProps.stickOut === 0 && this.props.stickOut > 0) return;
+		if(this.props.stickOut !== nextProps.stickOut)
+			rSliderModel.update({
+				name: this.props.name,
+				stickOut: nextProps.stickOut
+			});
+	}
+
+
 	componentDidMount() {
 		rSliderModel.create({
 			...this.props,
