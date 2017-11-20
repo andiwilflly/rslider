@@ -81,7 +81,7 @@ class RSliderItem extends RSliderBasic {
 		if(this.slider.devMode) console.log('RSliderItem render');
 
 		return (
-			<div className={ this.className }
+			<div className={ this.className + ` ${this.isCurrentVisibleItem ? "rslider__slide_state_active" : ""}` }
 				 style={{
 					width: this.slider.itemWidth,
 					height: this.isCurrentVisibleItem ? 'auto' : 0,

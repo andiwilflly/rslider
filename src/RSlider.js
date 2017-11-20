@@ -78,8 +78,8 @@ class RSlider extends RSliderBasic {
 
 		// Better call [rSlider.callbacks] from [reactions]
 		this['RSlider | changed: this.slider.currentStep | run: this.slider.onStepChange()'] = reaction(
-			()=> this.slider.currentStep,
-			()=> this.slider.onStepChange(this.slider),
+			()=> this.slider && this.slider.currentStep,
+			()=> this.slider && this.slider.onStepChange(this.slider),
 			{ name: 'RSlider | changed: this.slider.currentStep | run: this.slider.onStepChange()' }
 		);
 	}
@@ -102,11 +102,12 @@ class RSlider extends RSliderBasic {
 					 style={ this.slider ?
 					    {
 					    	...this.slider.style,
-					    	width: '100%',
-					    	boxSizing: 'content-box',
-					        paddingRight: this.props.stickOut + 'px' }
+							...this.props.stickOut && { paddingRight: this.props.stickOut + 'px' }
+					    }
 					    :
-					    { paddingRight: this.props.stickOut + 'px'}
+					    {
+					    	...this.props.stickOut && { paddingRight: this.props.stickOut + 'px' }
+					    }
 					 }>
 
 					{ this.slider ? this.props.children : null }
