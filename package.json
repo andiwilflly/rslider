@@ -1,5 +1,5 @@
 {
-  "version": "2.12.4",
+  "version": "2.12.12",
   "main": "lib/index.js",
   "homepage": "https://github.com/andiwilflly/rslider",
   "description": "rslider",
@@ -46,6 +46,9 @@
   "keywords": [
     "rslider",
     "mobx",
+    "slider",
+    "simple",
+    "mobx slider",
     "react"
   ],
   "scripts": {

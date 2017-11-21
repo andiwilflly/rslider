@@ -35,14 +35,6 @@ class RSliderBasic extends React.Component {
 	}
 
 
-	// @SOURCE: https://alastairc.ac/2010/03/detecting-touch-based-browsing
-	get isTouchDevice() {
-		const el = document.createElement('div');
-		el.setAttribute('ongesturestart', 'return;');
-		return typeof el.ongesturestart === "function";
-	}
-
-
 	getElementPureWidth(element) {
 		const styles = window.getComputedStyle(element);
 		const padding = parseFloat(styles.paddingLeft) + parseFloat(styles.paddingRight);

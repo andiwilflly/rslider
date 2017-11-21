@@ -41,20 +41,20 @@ class RSliderDraggable extends RSliderBasic {
 
 		init: (el)=> {
 			this.draggable.el = el;
-			if(this.isTouchDevice) {
-				// Mobile drag events
-				this.draggable.el.addEventListener('touchstart', (e)=> {
-					this.draggable.x = e.touches[0].pageX;
-					this.draggable.start();
-				}, false);
+
+			// Desktop drag events
+			this.draggable.el.addEventListener('mousedown', this.draggable.start, false);
+			document.addEventListener('mousemove', this.draggable.move, false);
+			document.addEventListener('mouseup', this.draggable.stop, false);
+
+			// Mobile drag events
+			this.draggable.el.addEventListener('touchstart', (e)=> {
+				this.draggable.x = e.touches[0].pageX;
+				this.draggable.start();
+
 				this.draggable.el.addEventListener('touchmove', this.draggable.move, false);
-				window.addEventListener('touchend', this.draggable.stop, false);
-			} else {
-				// Desktop drag events
-				this.draggable.el.addEventListener('mousedown', this.draggable.start, false);
-				document.addEventListener('mousemove', this.draggable.move, false);
-				document.addEventListener('mouseup', this.draggable.stop, false);
-			}
+			}, false);
+			window.addEventListener('touchend', this.draggable.stop, false);
 		},
 
 
@@ -66,20 +66,16 @@ class RSliderDraggable extends RSliderBasic {
 
 
 		move: (e)=> {
-			if(this.isTouchDevice) {
-				this.draggable.x = e.touches[0].pageX;
-			} else {
-				this.draggable.x = document.all ? window.event["clientX"] : e["pageX"];
-			}
+			this.draggable.x = (e.touches && e.touches[0].pageX) || (document.all ? window.event["clientX"] : e["pageX"]);
 
 			if(!this.draggable.isSelectedEl) return;
 
-			if(this.draggable.dragIterationsCounter === 5 && Math.abs(this.draggable.realStartX - this.draggable.x) <= 40) {
+			if(e.touches && this.draggable.dragIterationsCounter === 4 && Math.abs(this.draggable.realStartX - this.draggable.x) <= 60) {
 				console.log('IS-VERTICAL');
 				return this.draggable.stop();
 			} else {
 				// Prevent default for mobile devices (IOS Safari problems) when drag event is not [vertical]
-				e.preventDefault();
+				if(e.touches) e.preventDefault();
 			}
 
 			this.draggable.dragIterationsCounter +=1;
@@ -111,23 +107,24 @@ class RSliderDraggable extends RSliderBasic {
 					:
 					Math.round(diff / step)
 			});
+
+			// UnSubscribe
+			this.draggable.el.removeEventListener('touchmove', this.draggable.move);
 			// Callback
 			this.slider.onDragEnd(this.slider, this.draggable);
 		},
 
 
 		remove: ()=> {
-			if(this.isTouchDevice) {
-				// Mobile drag events
-				this.draggable.el.removeEventListener('touchstart', this.draggable.start);
-				document.removeEventListener('touchmove', this.draggable.move);
-				window.removeEventListener('touchend', this.draggable.stop);
-			} else {
-				// Desktop drag events
-				this.draggable.el.removeEventListener("mousedown", this.draggable.start);
-				document.removeEventListener("mousemove", this.draggable.move);
-				document.removeEventListener("mouseup", this.draggable.stop);
-			}
+			// Mobile drag events
+			this.draggable.el.removeEventListener('touchstart', this.draggable.start);
+			this.draggable.el.removeEventListener('touchmove', this.draggable.move);
+			window.removeEventListener('touchend', this.draggable.stop);
+
+			// Desktop drag events
+			this.draggable.el.removeEventListener("mousedown", this.draggable.start);
+			document.removeEventListener("mousemove", this.draggable.move);
+			document.removeEventListener("mouseup", this.draggable.stop);
 		}
 	};
 
