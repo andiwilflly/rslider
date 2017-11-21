@@ -34,8 +34,10 @@ class RSliderDraggable extends RSliderBasic {
 	draggable = {
 		x: 0,
 		startX: 0,
+		realStartX: 0,
 		el: null,
 		isSelectedEl: false,
+		dragIterationsCounter: 0,
 
 		init: (el)=> {
 			this.draggable.el = el;
@@ -58,6 +60,7 @@ class RSliderDraggable extends RSliderBasic {
 
 		start: ()=> {
 			this.draggable.isSelectedEl = true;
+			this.draggable.realStartX = this.draggable.x;
 			this.draggable.startX = this.draggable.x - this.draggable.el['offsetLeft'];
 		},
 
@@ -73,6 +76,11 @@ class RSliderDraggable extends RSliderBasic {
 			// Prevent default for mobile devices (IOS Safari problems) when drag event is not [vertical]
 			e.preventDefault();
 
+			if(this.draggable.dragIterationsCounter === 10 && Math.abs(this.draggable.realStartX - this.draggable.x) <= 30)
+				return this.draggable.stop();
+
+			this.draggable.dragIterationsCounter +=1;
+
 			this.draggable.el.className = 'rslider__track rslider__track_state_selected'; // Disable [transition]
 			rSliderModel.update({
 				name: this.slider.name,
@@ -83,6 +91,8 @@ class RSliderDraggable extends RSliderBasic {
 
 		stop: ()=> {
 			if(!this.draggable.isSelectedEl) return;
+
+			this.draggable.dragIterationsCounter = false;
 			this.draggable.isSelectedEl = false;
 			this.draggable.el.className = 'rslider__track'; // Enable [transition]
 
