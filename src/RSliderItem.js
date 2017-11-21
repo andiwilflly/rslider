@@ -27,8 +27,8 @@ class RSliderItem extends RSliderBasic {
 	componentDidMount() {
 		if(!this.slider.autoPlay) return;
 		this['RSliderItem | changed: rSliderModel.currentStep | run: this.startItemAutoPlayInterval()'] = reaction(
-			()=> this.slider.currentVisibleItems[0] === this.props.itemIndex,
-			()=> this.isAutoPlay ? this.startItemAutoPlayInterval() : clearTimeout(this.timer),
+			()=> this.slider && this.slider.currentVisibleItems[0] === this.props.itemIndex,
+			()=> this.slider && this.isAutoPlay ? this.startItemAutoPlayInterval() : clearTimeout(this.timer),
 			{
 				name: 'RSliderItem | changed: rSliderModel.currentStep | run: this.startItemAutoPlayInterval()',
 				fireImmediately: this.isAutoPlay

@@ -73,11 +73,14 @@ class RSliderDraggable extends RSliderBasic {
 			}
 
 			if(!this.draggable.isSelectedEl) return;
-			// Prevent default for mobile devices (IOS Safari problems) when drag event is not [vertical]
-			e.preventDefault();
 
-			if(this.draggable.dragIterationsCounter === 10 && Math.abs(this.draggable.realStartX - this.draggable.x) <= 30)
+			if(this.draggable.dragIterationsCounter === 5 && Math.abs(this.draggable.realStartX - this.draggable.x) <= 40) {
+				console.log('IS-VERTICAL');
 				return this.draggable.stop();
+			} else {
+				// Prevent default for mobile devices (IOS Safari problems) when drag event is not [vertical]
+				e.preventDefault();
+			}
 
 			this.draggable.dragIterationsCounter +=1;
 
