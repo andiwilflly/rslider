@@ -70,7 +70,7 @@ class RSliderDraggable extends RSliderBasic {
 
 			if(!this.draggable.isSelectedEl) return;
 
-			if(e.touches && this.draggable.dragIterationsCounter === 4 && Math.abs(this.draggable.realStartX - this.draggable.x) <= 60) {
+			if(e.touches && this.draggable.dragIterationsCounter === 2 && Math.abs(this.draggable.realStartX - this.draggable.x) <= 70) {
 				console.log('IS-VERTICAL');
 				return this.draggable.stop();
 			} else {
