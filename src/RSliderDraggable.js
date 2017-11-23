@@ -33,11 +33,13 @@ class RSliderDraggable extends RSliderBasic {
 	// @SOURCE: http://codepen.io/Shikkediel/pen/VLZKor [mobile]
 	draggable = {
 		x: 0,
+		y: 0,
 		startX: 0,
-		realStartX: 0,
+		realStartPos: { x: 0, y: 0 },
 		el: null,
 		isSelectedEl: false,
-		dragIterationsCounter: 0,
+		moveCounter: 0,
+		isVerticalDrag: false,
 
 		init: (el)=> {
 			this.draggable.el = el;
@@ -50,8 +52,13 @@ class RSliderDraggable extends RSliderBasic {
 			// Mobile drag events
 			this.draggable.el.addEventListener('touchstart', (e)=> {
 				this.draggable.x = e.touches[0].pageX;
+				this.draggable.y = e.touches[0].pageY;
 				this.draggable.start();
 
+				this.draggable._isVerticalDrag({
+					x: e.touches[0].pageX,
+					y: e.touches[0].pageY
+				});
 				this.draggable.el.addEventListener('touchmove', this.draggable.move, false);
 			}, false);
 			window.addEventListener('touchend', this.draggable.stop, false);
@@ -60,25 +67,22 @@ class RSliderDraggable extends RSliderBasic {
 
 		start: ()=> {
 			this.draggable.isSelectedEl = true;
-			this.draggable.realStartX = this.draggable.x;
 			this.draggable.startX = this.draggable.x - this.draggable.el['offsetLeft'];
 		},
 
 
 		move: (e)=> {
 			this.draggable.x = (e.touches && e.touches[0].pageX) || (document.all ? window.event["clientX"] : e["pageX"]);
+			this.draggable.y = (e.touches && e.touches[0].pageY) || (document.all ? window.event["clientY"] : e["pageY"]);
 
 			if(!this.draggable.isSelectedEl) return;
+			if(this.draggable.isVerticalDrag) return this.draggable.stop();
 
-			if(e.touches && this.draggable.dragIterationsCounter === 2 && Math.abs(this.draggable.realStartX - this.draggable.x) <= 70) {
-				console.log('IS-VERTICAL');
-				return this.draggable.stop();
-			} else {
-				// Prevent default for mobile devices (IOS Safari problems) when drag event is not [vertical]
-				if(e.touches) e.preventDefault();
-			}
-
-			this.draggable.dragIterationsCounter +=1;
+			// Prevent default for mobile devices (IOS Safari problems) when drag event is not [vertical]
+			if(!this.draggable._isVerticalDrag({
+					x: this.draggable.x,
+					y: this.draggable.y
+				})) e.preventDefault();
 
 			this.draggable.el.className = 'rslider__track rslider__track_state_selected'; // Disable [transition]
 			rSliderModel.update({
@@ -91,7 +95,8 @@ class RSliderDraggable extends RSliderBasic {
 		stop: ()=> {
 			if(!this.draggable.isSelectedEl) return;
 
-			this.draggable.dragIterationsCounter = false;
+			this.draggable.moveCounter = 0;
+			this.draggable.isVerticalDrag = false;
 			this.draggable.isSelectedEl = false;
 			this.draggable.el.className = 'rslider__track'; // Enable [transition]
 
@@ -125,6 +130,24 @@ class RSliderDraggable extends RSliderBasic {
 			this.draggable.el.removeEventListener("mousedown", this.draggable.start);
 			document.removeEventListener("mousemove", this.draggable.move);
 			document.removeEventListener("mouseup", this.draggable.stop);
+		},
+
+
+		_isVerticalDrag: ({ x, y })=> {
+			if(this.draggable.moveCounter === 0) {
+				this.draggable.realStartPos = { x, y };
+				this.draggable.moveCounter+=1;
+			} else {
+				if(Math.abs(this.draggable.realStartPos.x - x) <= Math.abs(this.draggable.realStartPos.y - y)) {
+					console.log('[vertical drag]');
+					this.draggable.isVerticalDrag = true;
+					this.draggable.moveCounter +=1;
+					return true;
+				} else {
+					this.draggable.moveCounter +=1;
+					return false;
+				}
+			}
 		}
 	};
 

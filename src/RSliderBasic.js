@@ -51,6 +51,7 @@ class RSliderBasic extends React.Component {
 	recalculateSliderItems = ()=> {
 		clearTimeout(this._timeout['recalculateSliderItems']);
 		this._timeout['recalculateSliderItems'] = setTimeout(()=> {
+			if(!this.slider) return;
 			const childrenLength = this.props.children.type ? 1 : this.props.children.length;
 			const isShortSlider = childrenLength <= this.slider.itemsShow;
 

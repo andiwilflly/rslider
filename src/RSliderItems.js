@@ -47,6 +47,7 @@ class RSliderItems extends RSliderBasic {
 		// Fix problem when we have [children] count update after [rSlider] creation
 		clearTimeout(this.timeout);
 		this.timeout = setTimeout(()=> {
+			if(!this.slider) return;
 			if(nextProps.children.length !== this.slider.itemsCount) {
 				const event = document.createEvent('HTMLEvents');
 				event.initEvent('resize', true, false);
