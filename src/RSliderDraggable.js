@@ -95,7 +95,6 @@ class RSliderDraggable extends RSliderBasic {
 		stop: ()=> {
 			if(!this.draggable.isSelectedEl) return;
 
-			this.draggable.moveCounter = 0;
 			this.draggable.isVerticalDrag = false;
 			this.draggable.isSelectedEl = false;
 			this.draggable.el.className = 'rslider__track'; // Enable [transition]
@@ -105,13 +104,17 @@ class RSliderDraggable extends RSliderBasic {
 			const currentSlideDiff = diff - this.slider.currentStep * step;
 			const diffPercent = Math.round(Math.abs(currentSlideDiff * 100 / this.slider.itemWidth));
 
-			rSliderModel.update({
-				name: this.slider.name,
-				currentStep: diffPercent > this.slider.draggableSensitivity ? currentSlideDiff > 0 ?
-					this.slider.currentStep + 1 : this.slider.currentStep - 1
-					:
-					Math.round(diff / step)
-			});
+			if(this.draggable.moveCounter > 1) {
+				rSliderModel.update({
+					name: this.slider.name,
+					currentStep: diffPercent > this.slider.draggableSensitivity ? currentSlideDiff > 0 ?
+						this.slider.currentStep + 1 : this.slider.currentStep - 1
+						:
+						Math.round(diff / step)
+				});
+			}
+
+			this.draggable.moveCounter = 0;
 
 			// UnSubscribe
 			this.draggable.el.removeEventListener('touchmove', this.draggable.move);
