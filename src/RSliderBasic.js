@@ -43,7 +43,7 @@ class RSliderBasic extends React.Component {
 
 
 	onResizeSlider = ()=> {
-		if(this.slider.media) this.detectMediaMatch();
+		if(this.slider && this.slider.media) this.detectMediaMatch();
 	};
 
 
@@ -78,6 +78,7 @@ class RSliderBasic extends React.Component {
 	detectMediaMatch = ()=> {
 		clearTimeout(this._timeout['detectMediaMatch']);
 		this._timeout['detectMediaMatch'] = setTimeout(()=> {
+			if(!this.slider) return;
 			let isMatched = false;
 
 			Object.keys(this.slider.media).some((mediaName)=> {
