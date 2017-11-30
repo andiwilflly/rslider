@@ -34,6 +34,7 @@ class RSliderModel {
 		onDragEnd: (slider, draggable)=> {},
 
 		// Private
+		isDraggableMouseEnter: false,
 		leftPosition: 0,
 		sliderWidth: 0,
 		itemWidth: 0,

@@ -69,6 +69,10 @@ class RSliderItem extends RSliderBasic {
 	startItemAutoPlayInterval() {
 		this.timer = setTimeout(()=> {
 			if(!this.slider) return; // RSlider was removed before
+			if(this.slider.isDraggableMouseEnter) {
+				console.info(`[rSlider ${this.slider.name} hovered: AutoPlay stopped...] (duration: ${this.duration})`);
+				return this.startItemAutoPlayInterval();
+			}
 			rSliderModel.update({
 				name: this.slider.name,
 				currentStep: rSliderModel.steps.isLast(this.slider) ? 0 : this.slider.currentStep + 1

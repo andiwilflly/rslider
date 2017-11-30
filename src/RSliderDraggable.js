@@ -46,6 +46,8 @@ class RSliderDraggable extends RSliderBasic {
 
 			// Desktop drag events
 			this.draggable.el.addEventListener('mousedown', this.draggable.start, false);
+			this.draggable.el.addEventListener('mouseenter', this.draggable.enter, false);
+			this.draggable.el.addEventListener('mouseleave', this.draggable.leave, false);
 			document.addEventListener('mousemove', this.draggable.move, false);
 			document.addEventListener('mouseup', this.draggable.stop, false);
 
@@ -68,6 +70,26 @@ class RSliderDraggable extends RSliderBasic {
 		start: ()=> {
 			this.draggable.isSelectedEl = true;
 			this.draggable.startX = this.draggable.x - this.draggable.el['offsetLeft'];
+			rSliderModel.update({
+				name: this.slider.name,
+				leftPosition: (this.draggable.x - this.draggable.startX)
+			});
+		},
+
+
+		enter: (e)=> {
+			rSliderModel.update({
+				name: this.slider.name,
+				isDraggableMouseEnter: true
+			});
+		},
+
+
+		leave: (e)=> {
+			rSliderModel.update({
+				name: this.slider.name,
+				isDraggableMouseEnter: false
+			});
 		},
 
 
@@ -127,6 +149,8 @@ class RSliderDraggable extends RSliderBasic {
 			// Mobile drag events
 			this.draggable.el.removeEventListener('touchstart', this.draggable.start);
 			this.draggable.el.removeEventListener('touchmove', this.draggable.move);
+			this.draggable.el.removeEventListener('mouseenter', this.draggable.enter);
+			this.draggable.el.removeEventListener('mouseleave', this.draggable.leave);
 			window.removeEventListener('touchend', this.draggable.stop);
 
 			// Desktop drag events
