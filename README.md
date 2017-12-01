@@ -48,6 +48,7 @@ You can find styles for rSlider in: `node_modules/rslider/rslider.css`
 | onStepChange | (slider)=>{} | Callback, that fire right after **rSlider** step changes. Returns **rSlider** model as first argument |
 | onDragEnd | (slider,draggable)=>{} | Callback, that fire right after **rSlider** drag event ends. Returns **rSlider** model as first argument and **draggable** state object as the second |
 | stickOut | 0 | Allows you to show some part of the next slide. That number converts in pixels |
+| stopOnHover | false | Allows you to stop rSlider [autoplay] on mouseover event (works only if [autoPlay] enabled) |
 
 
 ## Usage

@@ -37,6 +37,7 @@ class RSlider extends RSliderBasic {
 		draggableSensitivity: 10, // Diff more 10% from right or from left side cause [rSlider.currentStep] change (only for [draggable] mode)
 		autoPlay: false,
 		stickOut: 0, // [0%-100%]
+		stopOnHover: false,
 
 		// Public callbacks
 		onReady: (slider)=> {},
@@ -76,6 +77,12 @@ class RSlider extends RSliderBasic {
 		if(this.slider.media) this.detectMediaMatch();
 		window.addEventListener("resize", this.onResizeSlider);
 
+		if(this.slider.autoPlay && this.slider.stopOnHover) {
+			this.refs.rSlider.addEventListener('mouseenter', this.mouseEnter, false);
+			this.refs.rSlider.addEventListener('mouseleave', this.mouseLeave, false);
+		}
+
+
 		// Better call [rSlider.callbacks] from [reactions]
 		this['RSlider | changed: this.slider.currentStep | run: this.slider.onStepChange()'] = reaction(
 			()=> this.slider && this.slider.currentStep,
@@ -88,9 +95,31 @@ class RSlider extends RSliderBasic {
 	componentWillUnmount() {
 		this['RSlider | changed: this.slider.currentStep | run: this.slider.onStepChange()']();
 		window.removeEventListener("resize", this.onResizeSlider);
+
+		if(this.slider.autoPlay && this.slider.stopOnHover) {
+			this.refs.rSlider.removeEventListener('mouseenter', this.mouseEnter);
+			this.refs.rSlider.removeEventListener('mouseleave', this.mouseLeave);
+		}
+
 		// We need to take some time, before all RSlider [components] unMounted and remove their [reactions]
 		if(this.slider) rSliderModel.remove({ name: this.slider.name });
 	}
+
+
+	mouseEnter = ()=> {
+		rSliderModel.update({
+			name: this.slider.name,
+			isDraggableMouseEnter: true
+		});
+	};
+
+
+	mouseLeave = ()=> {
+		rSliderModel.update({
+			name: this.slider.name,
+			isDraggableMouseEnter: false
+		});
+	};
 
 
 	// TODO: Add on key press events
