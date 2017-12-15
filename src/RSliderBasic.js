@@ -55,10 +55,7 @@ class RSliderBasic extends React.Component {
 			const childrenLength = this.props.children.type ? 1 : this.props.children.length;
 			const isShortSlider = childrenLength <= this.slider.itemsShow;
 
-			const itemWidth = isShortSlider ?
-			this.getElementPureWidth(this.slider.sliderEl) / childrenLength
-				:
-			this.getElementPureWidth(this.slider.sliderEl) / this.slider.itemsShow;
+			const itemWidth = this.getElementPureWidth(this.slider.sliderEl) / this.slider.itemsShow; // item width always the same (even for [isShortSlider])
 
 			if(!this.slider.itemsCount) this.slider.onReady(this.slider);
 
