@@ -50,7 +50,9 @@ class RSliderModel {
 
 
 	create(state:Object) :RSliderModel {
-		runInAction(`🦄-SLIDER-CREATE-${ this.rSliders.get(state.name) ? 'ERROR (already exists)' : 'SUCCESS' }-${state.name}`, ()=> {
+		if(!state.name) return runInAction(`🦄-SLIDER-CREATE-ERROR name is ${state.name}`, ()=> {});
+		runInAction(`🦄-SLIDER-CREATE-${ this.rSliders.has(state.name) ? 'ERROR (already exists)' : 'SUCCESS' }-${state.name}`, ()=> {
+			if(this.rSliders.has(state.name)) this.remove(state.name);
 			this.rSliders.set(state.name, observable(Object.assign(this.defaultSlider,state, {
 				leftPosition: state.leftPosition || this._getLeftPosition(Object.assign(this.defaultSlider, state)),
 				currentVisibleItems: this._getCurrentVisibleItems(Object.assign(this.defaultSlider, state))
@@ -101,6 +103,7 @@ class RSliderModel {
 
 
 	remove({ name }) :RSliderModel {
+		if(!name) runInAction(`🦄-SLIDER-REMOVE-'ERROR (no such slider name: ${name})' }`, ()=> {});
 		runInAction(`🦄-SLIDER-REMOVE-${ this.rSliders.delete(name) ? 'SUCCESS' : 'ERROR (no such slider)' }-${name}`, ()=> {});
 		return this;
 	}

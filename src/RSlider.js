@@ -93,10 +93,10 @@ class RSlider extends RSliderBasic {
 
 
 	componentWillUnmount() {
-		this['RSlider | changed: this.slider.currentStep | run: this.slider.onStepChange()']();
+		if(this['RSlider | changed: this.slider.currentStep | run: this.slider.onStepChange()']) this['RSlider | changed: this.slider.currentStep | run: this.slider.onStepChange()']();
 		window.removeEventListener("resize", this.onResizeSlider);
 
-		if(this.slider.autoPlay && this.slider.stopOnHover) {
+		if(this.slider && this.slider.autoPlay && this.slider.stopOnHover) {
 			this.refs.rSlider.removeEventListener('mouseenter', this.mouseEnter);
 			this.refs.rSlider.removeEventListener('mouseleave', this.mouseLeave);
 		}
