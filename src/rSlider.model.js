@@ -52,7 +52,7 @@ class RSliderModel {
 	create(state:Object) :RSliderModel {
 		if(!state.name) return runInAction(`🦄-SLIDER-CREATE-ERROR name is ${state.name}`, ()=> {});
 		runInAction(`🦄-SLIDER-CREATE-${ this.rSliders.has(state.name) ? 'ERROR (already exists)' : 'SUCCESS' }-${state.name}`, ()=> {
-			if(this.rSliders.has(state.name)) this.remove(state.name);
+			if(this.rSliders.has(state.name)) this.remove({ name: state.name });
 			this.rSliders.set(state.name, observable(Object.assign(this.defaultSlider,state, {
 				leftPosition: state.leftPosition || this._getLeftPosition(Object.assign(this.defaultSlider, state)),
 				currentVisibleItems: this._getCurrentVisibleItems(Object.assign(this.defaultSlider, state))
