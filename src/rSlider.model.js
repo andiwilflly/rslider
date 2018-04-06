@@ -1,7 +1,7 @@
 // React
 import React from 'react';
 // MobX
-import { action, transaction, reaction, observable, computed, autorun, extendObservable, runInAction } from 'mobx';
+import { action, observable, runInAction } from 'mobx';
 
 
 // @SOURCE: https://mobx.js.org/refguide/modifiers.html#modifiers-for-observable
@@ -80,22 +80,23 @@ class RSliderModel {
 
 		// Start of custom animation
 		if(this.slides.isCustomAnimationEffect(rSlider)) {
-			extendObservable(rSlider, { customAnimationStatus: 'started' });
+			rSlider = { ...rSlider, customAnimationStatus: 'started' };
 			await this.delay(this.slides.customAnimationDuration(rSlider) / 1.3);
 		}
 
 		// Extend [state] with [rSlider]
-		extendObservable(rSlider, state);
-		extendObservable(rSlider, {
+		rSlider = { ...rSlider, ...state };
+		rSlider = {
+			...rSlider,
 			leftPosition: state.leftPosition || this._getLeftPosition(rSlider),
 			currentVisibleItems: this._getCurrentVisibleItems(rSlider)
-		});
+		};
 
 		// End of custom animation
 		if(this.slides.isCustomAnimationEffect(rSlider)) {
-			extendObservable(rSlider, { customAnimationStatus: 'running' });
+			rSlider = { ...rSlider,  customAnimationStatus: 'running' };
 			await this.delay(this.slides.customAnimationDuration(rSlider));
-			extendObservable(rSlider, { customAnimationStatus: 'disabled' });
+			rSlider = { ...rSlider,  customAnimationStatus: 'disabled' };
 		}
 
 		return this;
