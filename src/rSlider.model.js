@@ -80,25 +80,24 @@ class RSliderModel {
 
 		// Start of custom animation
 		if(this.slides.isCustomAnimationEffect(rSlider)) {
-			rSlider = { ...rSlider, customAnimationStatus: 'started' };
+			this.rSliders.set(state.name, { ...rSlider, customAnimationStatus: 'started' });
 			await this.delay(this.slides.customAnimationDuration(rSlider) / 1.3);
 		}
 
 		// Extend [state] with [rSlider]
-		rSlider = { ...rSlider, ...state };
-		rSlider = {
+		this.rSliders.set(state.name, { ...rSlider, ...state });
+		this.rSliders.set(state.name, {
 			...rSlider,
 			leftPosition: state.leftPosition || this._getLeftPosition(rSlider),
 			currentVisibleItems: this._getCurrentVisibleItems(rSlider)
-		};
+		});
 
 		// End of custom animation
 		if(this.slides.isCustomAnimationEffect(rSlider)) {
-			rSlider = { ...rSlider,  customAnimationStatus: 'running' };
+			this.rSliders.set(state.name, { ...rSlider,  customAnimationStatus: 'running' });
 			await this.delay(this.slides.customAnimationDuration(rSlider));
-			rSlider = { ...rSlider,  customAnimationStatus: 'disabled' };
+			this.rSliders.set(state.name, { ...rSlider,  customAnimationStatus: 'disabled' });
 		}
-
 		return this;
 	}
 
