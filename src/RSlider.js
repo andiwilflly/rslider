@@ -51,6 +51,9 @@ class RSlider extends RSliderBasic {
 	};
 
 
+	rSliderRef = React.createRef();
+
+
 	getChildContext() {
 		return { name: this.props.name };
 	}
@@ -76,17 +79,17 @@ class RSlider extends RSliderBasic {
 	componentDidMount() {
 		rSliderModel.create({
 			...this.props,
-			sliderEl: this.refs.rSlider,
-			sliderWidth: this.refs.rSlider.offsetWidth,
-			itemWidth: this.getElementPureWidth(this.refs.rSlider) / this.props.itemsShow
+			sliderEl: this.rSliderRef.current,
+			sliderWidth: this.rSliderRef.current.offsetWidth,
+			itemWidth: this.getElementPureWidth(this.rSliderRef.current) / this.props.itemsShow
 		});
 
 		if(this.slider.media) this.detectMediaMatch();
 		window.addEventListener("resize", this.onResizeSlider);
 
 		if(this.slider.autoPlay && this.slider.stopOnHover) {
-			this.refs.rSlider.addEventListener('mouseenter', this.mouseEnter, false);
-			this.refs.rSlider.addEventListener('mouseleave', this.mouseLeave, false);
+			this.rSliderRef.current.addEventListener('mouseenter', this.mouseEnter, false);
+			this.rSliderRef.current.addEventListener('mouseleave', this.mouseLeave, false);
 		}
 
 
@@ -104,8 +107,8 @@ class RSlider extends RSliderBasic {
 		window.removeEventListener("resize", this.onResizeSlider);
 
 		if(this.slider && this.slider.autoPlay && this.slider.stopOnHover) {
-			this.refs.rSlider.removeEventListener('mouseenter', this.mouseEnter);
-			this.refs.rSlider.removeEventListener('mouseleave', this.mouseLeave);
+			this.rSliderRef.current.removeEventListener('mouseenter', this.mouseEnter);
+			this.rSliderRef.current.removeEventListener('mouseleave', this.mouseLeave);
 		}
 
 		// We need to take some time, before all RSlider [components] unMounted and remove their [reactions]
@@ -134,7 +137,7 @@ class RSlider extends RSliderBasic {
 		return (
 			<div>
 				<div className={ `rslider ${  this.slider ? this.slider.className : '' }` }
-					 ref="rSlider"
+					 ref={ this.rSliderRef }
 					 style={ this.slider ?
 					    {
 					    	...this.slider.style,

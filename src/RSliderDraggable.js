@@ -19,8 +19,11 @@ class RSliderDraggable extends RSliderBasic {
 	};
 
 
+	rSliderDraggableRef = React.createRef();
+
+
 	componentDidMount() {
-		this.draggable.init(this.refs.rSliderDraggable);
+		this.draggable.init(this.rSliderDraggableRef.current);
 	}
 
 
@@ -163,7 +166,7 @@ class RSliderDraggable extends RSliderBasic {
 		if(this.slider.devMode) console.log('RSliderDraggable render');
 
 		return (
-			<div className="rslider__track" ref="rSliderDraggable" style={{
+			<div className="rslider__track" ref={ this.rSliderDraggableRef } style={{
 					width: this.slider.innerWidth,
 					left: this.slider.leftPosition
 				}}>
