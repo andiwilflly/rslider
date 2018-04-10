@@ -49,6 +49,9 @@ class RSliderModel {
 	elements = ['RSliderArrowL', 'RSliderArrowR', 'RSliderItems', 'RSliderItem', 'RSliderPagination'];
 
 
+	slider(name) { return this.rSliders.get(name); }
+
+
 	create(state:Object) :RSliderModel {
 		if(!state.name) return runInAction(`🦄-SLIDER-CREATE-ERROR name is ${state.name}`, ()=> {});
 		runInAction(`🦄-SLIDER-CREATE-${ this.rSliders.has(state.name) ? 'ERROR (already exists)' : 'SUCCESS' }-${state.name}`, ()=> {
@@ -63,40 +66,52 @@ class RSliderModel {
 
 
 	async update(state:Object) :RSliderModel {
-		let rSlider = this.rSliders.get(state.name);
-
-		if(!rSlider) runInAction(`🦄-SLIDER-UPDATE-ERROR (no such slider) ${state.name}`, ()=>{});
+		if(!this.slider(state.name)) runInAction(`🦄-SLIDER-UPDATE-ERROR (no such slider) ${state.name}`, ()=>{});
 
 		// Disable [rSlider] when [rSlider.customAnimation] is running
-		if(rSlider.customAnimationStatus !== 'disabled') return this;
+		if(this.slider(state.name).customAnimationStatus !== 'disabled') return this;
+
 
 		// [Last] slide already reached, but you trying to move further
 		// Back to [first] slide after [last] if [infinity] mode On
-		if(state.currentStep >= this.steps.all(rSlider)) state.currentStep = rSlider.infinity ? 0 : this.steps.all(rSlider)-1;
+		if(state.currentStep >= this.steps.all(this.slider(state.name))) state.currentStep = this.slider(state.name).infinity ? 0 : this.steps.all(this.slider(state.name))-1;
 
 		// [Firs] slide already reached, but you trying to move further
 		// Back to [last] slider after [first] if [infinity] mode On
-		if(state.currentStep < 0) state.currentStep = rSlider.infinity ? this.steps.all(rSlider)-1 : 0;
+		if(state.currentStep < 0) state.currentStep = this.slider(state.name).infinity ? this.steps.all(this.slider(state.name))-1 : 0;
 
 		// Start of custom animation
-		if(this.slides.isCustomAnimationEffect(rSlider)) {
-			this.rSliders.set(state.name, { ...rSlider, customAnimationStatus: 'started' });
-			await this.delay(this.slides.customAnimationDuration(rSlider) / 1.3);
+		if(this.slides.isCustomAnimationEffect(this.slider(state.name))) {
+			this.rSliders.set(state.name, {
+				...this.slider(state.name),
+				customAnimationStatus: 'started'
+			});
+			await this.delay(this.slides.customAnimationDuration(this.slider(state.name)) / 1.3);
 		}
 
 		// Extend [state] with [rSlider]
-		this.rSliders.set(state.name, { ...rSlider, ...state });
 		this.rSliders.set(state.name, {
-			...rSlider,
-			leftPosition: state.leftPosition || this._getLeftPosition(rSlider),
-			currentVisibleItems: this._getCurrentVisibleItems(rSlider)
+			...this.slider(state.name),
+			...state
+		});
+		this.rSliders.set(state.name, {
+			...this.slider(state.name),
+			leftPosition: state.leftPosition || this._getLeftPosition(this.slider(state.name)),
+			currentVisibleItems: this._getCurrentVisibleItems(this.slider(state.name))
 		});
 
+
 		// End of custom animation
-		if(this.slides.isCustomAnimationEffect(rSlider)) {
-			this.rSliders.set(state.name, { ...rSlider,  customAnimationStatus: 'running' });
-			await this.delay(this.slides.customAnimationDuration(rSlider));
-			this.rSliders.set(state.name, { ...rSlider,  customAnimationStatus: 'disabled' });
+		if(this.slides.isCustomAnimationEffect(this.slider(state.name))) {
+			this.rSliders.set(state.name, {
+				...this.slider(state.name),
+				customAnimationStatus: 'running'
+			});
+			await this.delay(this.slides.customAnimationDuration(this.slider(state.name)));
+			this.rSliders.set(state.name, {
+				...this.slider(state.name),
+				customAnimationStatus: 'disabled'
+			});
 		}
 		return this;
 	}
