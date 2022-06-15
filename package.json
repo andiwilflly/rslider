@@ -1,0 +1,15 @@
+{
+  "name": "@andiwillfly/kafka",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "publish": "npm version patch && npm publish --access=public"
+  },
+  "keywords": [
+    "digitalis",
+    "kafka"
+  ],
+  "author": "digitalis",
+  "license": "ISC"
+}
